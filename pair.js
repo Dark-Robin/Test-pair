@@ -55,7 +55,7 @@ router.get('/', async (req, res) => {
 
                       function randomMegaId(length = 6, numberLength = 4) {
                       const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-                      let result = '';
+                      let result = 'ROBIN=';
                       for (let i = 0; i < length; i++) {
                       result += characters.charAt(Math.floor(Math.random() * characters.length));
                         }
