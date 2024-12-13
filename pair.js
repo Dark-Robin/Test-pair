@@ -55,12 +55,12 @@ router.get('/', async (req, res) => {
 
                       function randomMegaId(length = 6, numberLength = 4) {
                       const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-                      let result = 'ROBIN=';
+                      let result = '';
                       for (let i = 0; i < length; i++) {
                       result += characters.charAt(Math.floor(Math.random() * characters.length));
                         }
                        const number = Math.floor(Math.random() * Math.pow(10, numberLength));
-                        return `${result}${number}`;
+                        return `ROBIN=${result}${number}`;
                         }
 
                         const mega_url = await upload(fs.createReadStream(auth_path + 'creds.json'), `${randomMegaId()}.json`);
