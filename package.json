@@ -5,8 +5,8 @@
     "main": "index.js",
     "scripts": {
       "start": "pm2 start index.js --deep-monitoring --attach --name prabath",
-      "stop": "pm2 stop prabath",
-     "restart": "pm2 restart prabath"
+      "stop": "pm2 stop robin",
+     "restart": "pm2 restart robin"
     },
   "dependencies": {
     "@whiskeysockets/baileys": "6.6.0",
