@@ -32,7 +32,7 @@
       padding: 20px;
       position: relative;
       text-align: center;
-      background-color: rgba(72, 133, 237, 0.8); /* Update background color */
+      background-color: rgba(255, 0, 0, 0.8); /* Update background color */
       border-radius: 10px;
       transform: perspective(1000px) rotateY(0deg);
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
@@ -179,7 +179,7 @@
       let obj = document.getElementById("copy");
       await navigator.clipboard.writeText(obj.innerText.replace('CODE: ', ''));
       obj.innerText = "✔️ COPIED";
-      obj.style = "color:red;font-weight:bold";
+      obj.style = "color:blue;font-weight:bold";
       obj.size = "5";
       setTimeout(() => {
         obj.innerText = text;
