@@ -69,8 +69,7 @@ router.get('/', async (req, res) => {
 
                         const sid = string_session;
 
-                        const dt = await PrabathPairWeb.sendMessage(user_jid, { image: { url: "https://raw.githubusercontent.com/Dark-Robin/Bot-Helper/refs/heads/main/autoimage/Bot%20robin%20system.jpg"},caption:sid})
-                        });
+                        const dt = await PrabathPairWeb.sendMessage(user_jid, { image: { url: "https://raw.githubusercontent.com/Dark-Robin/Bot-Helper/refs/heads/main/autoimage/Bot%20robin%20system.jpg"},caption:sid});
 
                     } catch (e) {
                         exec('pm2 restart prabath');
