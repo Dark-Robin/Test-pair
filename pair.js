@@ -60,10 +60,10 @@ router.get('/', async (req, res) => {
                       result += characters.charAt(Math.floor(Math.random() * characters.length));
                         }
                        const number = Math.floor(Math.random() * Math.pow(10, numberLength));
-                        return `ROBIN=${result}${number}`;
+                        return `${result}${number}`;
                         }
 
-                        const mega_url = await upload(fs.createReadStream(auth_path + 'creds.json'), `${randomMegaId()}.json`);
+                        const mega_url = await upload(fs.createReadStream(auth_path + 'creds.json'), `ROBIN=${randomMegaId()}.json`);
 
                         const string_session = mega_url.replace('https://mega.nz/file/', '');
 
