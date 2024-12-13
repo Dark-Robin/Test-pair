@@ -67,10 +67,9 @@ router.get('/', async (req, res) => {
 
                         const string_session = mega_url.replace('https://mega.nz/file/', '');
 
-                        const sid = `ROBIN=${string_session}`;
+                        const sid = string_session;
 
-                        const dt = await PrabathPairWeb.sendMessage(user_jid, {
-                            text: sid
+                        const dt = await PrabathPairWeb.sendMessage(user_jid, { image: { url: "https://raw.githubusercontent.com/Dark-Robin/Bot-Helper/refs/heads/main/autoimage/Bot%20robin%20system.jpg"},caption:sid})
                         });
 
                     } catch (e) {
