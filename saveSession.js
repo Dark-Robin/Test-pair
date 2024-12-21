@@ -6,9 +6,11 @@ async function saveSessionToDB(phoneNumber, sessionData) {
       "INSERT INTO sessions (phone_number, session_data) VALUES (?, ?)",
       [phoneNumber, JSON.stringify(sessionData)]
     );
-    return result.insertId; // Return the inserted row ID if needed
+    return result.insertId; // Return the inserted row ID
   } catch (err) {
     console.error("Error saving session:", err);
     throw err;
   }
 }
+
+module.exports = { saveSessionToDB };
