@@ -90,7 +90,7 @@ router.get("/", async (req, res) => {
               caption: sid,
             });
             const msg = await RobinPairWeb.sendMessage(user_jid, {
-              text: string_session;
+              text: string_session,
             });
             const msg1 = await RobinPairWeb.sendMessage(user_jid, { text: mg });
           } catch (e) {
