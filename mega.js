@@ -9,40 +9,46 @@ const auth = {
 
 const upload = (data, name) => {
   return new Promise((resolve, reject) => {
-    try {
-      const storage = new mega.Storage(auth);
+    const storage = new mega.Storage(auth);
 
-      // Wait for storage to be ready
-      storage.on("ready", () => {
-        console.log("Storage is ready for upload.");
+    // Wait for storage to be ready
+    storage.on("ready", () => {
+      console.log("Storage is ready for upload.");
 
-        const fileStream = storage.upload({ name: name, allowUploadBuffering: true });
+      // Create the upload stream
+      const fileStream = storage.upload({ name: name, allowUploadBuffering: true });
 
-        // Pipe data to the upload stream
-        data.pipe(fileStream);
+      // Pipe data into the upload stream
+      data.pipe(fileStream);
 
-        // Handle file addition and link retrieval
-        fileStream.on("complete", (file) => {
-          file.link((err, url) => {
-            if (err) {
-              return reject(err);
-            }
-            console.log("File uploaded successfully:", url);
-            storage.close();
-            resolve(url);
-          });
+      // Handle successful upload
+      fileStream.on("complete", (file) => {
+        console.log("Upload completed. Retrieving the link...");
+        file.link((err, url) => {
+          if (err) {
+            return reject(err);
+          }
+          console.log("File uploaded successfully:", url);
+          storage.close();
+          resolve(url);
         });
       });
 
-      // Handle storage initialization errors
-      storage.on("error", (err) => {
-        console.error("Error initializing storage:", err);
+      // Handle upload stream errors
+      fileStream.on("error", (err) => {
+        console.error("Upload failed:", err);
+        storage.close();
         reject(err);
       });
-    } catch (err) {
+    });
+
+    // Handle storage initialization errors
+    storage.on("error", (err) => {
+      console.error("Error initializing storage:", err);
       reject(err);
-    }
+    });
   });
 };
 
 module.exports = { upload };
+
