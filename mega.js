@@ -8,21 +8,36 @@ const auth = {
 
 const upload = (data, name) => {
   return new Promise((resolve, reject) => {
-    try {
-      const storage = new mega.Storage(auth, () => {
-        data.pipe(storage.upload({ name: name, allowUploadBuffering: true }));
-        storage.on("add", (file) => {
-          file.link((err, url) => {
-            if (err) throw err;
+    const storage = new mega.Storage(auth);
+
+    // Wait for the storage to be ready
+    storage.on("ready", () => {
+      console.log("Storage is ready. Proceeding with upload.");
+      const uploadStream = storage.upload({ name });
+
+      uploadStream.on("complete", (file) => {
+        file.link((err, url) => {
+          if (err) {
+            reject(err);
+          } else {
             storage.close();
             resolve(url);
-          });
+          }
         });
       });
-    } catch (err) {
+
+      uploadStream.on("error", (err) => {
+        reject(err);
+      });
+
+      data.pipe(uploadStream);
+    });
+
+    storage.on("error", (err) => {
       reject(err);
-    }
+    });
   });
 };
 
 module.exports = { upload };
+
