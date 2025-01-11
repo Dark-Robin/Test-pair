@@ -9,7 +9,7 @@ const auth = {
 const upload = (data, name) => {
   return new Promise((resolve, reject) => {
     try {
-      const storage = new mega.Storage(auth, () => {
+      const storage = new mega.storage(auth, () => {
         data.pipe(storage.upload({ name: name, allowUploadBuffering: true }));
         storage.on("add", (file) => {
           file.link((err, url) => {
