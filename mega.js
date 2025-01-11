@@ -10,10 +10,11 @@ const upload = (data, name) => {
   return new Promise((resolve, reject) => {
     const storage = new mega.Storage(auth);
 
-    // Wait for the storage to be ready
+    // Wait for storage to be ready
     storage.on("ready", () => {
       console.log("Storage is ready. Proceeding with upload.");
-      const uploadStream = storage.upload({ name });
+
+      const uploadStream = storage.upload({ name, allowUploadBuffering: true });
 
       uploadStream.on("complete", (file) => {
         file.link((err, url) => {
